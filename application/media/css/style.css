@@ -4,8 +4,43 @@
  */
 
 /* common*/
+body {
+	background-color: #bd664d;
+}
+
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus,
+select:focus,
+a:focus,
+.btn:focus {
+	outline: 0;
+	outline-offset: 0px;
+}
+
 .container {
 	width: 960px;
+}
+.welcome-page {
+	padding: 100px 0px;
+	background-color: #bd664d;
+}
+
+.welcome-img {
+	width: 500px;
+	height: 375px;
+	background-image: url(../images/welcome_bg.jpg);
+	-webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
+}
+
+.form-login, .form-register {
+	-webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
+	padding-bottom: 0;
+	margin-top: 0px;
 }
 /* common end*/
 

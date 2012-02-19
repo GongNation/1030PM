@@ -66,28 +66,35 @@
 	</div>
 	
 	<div class="container">
-		<!-- Main hero unit for a primary marketing message or call to action -->
-		<div class="hero-unit">
-			<h1>Hello, world!</h1>
-			<p>This is a project with kohana and bootstrap.</p>
-			<p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-		</div>
-
-		<!-- Example row of columns -->
-		<div class="row">
-			<div class="span5">
-				<h2>Heading</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-				<p><a class="btn" href="#">View details &raquo;</a></p>
+		<div class="hero-unit welcome-page">
+			<!-- Example row of columns -->
+			<div class="row">
+				<div class="span8">
+					<div class="welcome-img">
+						<h2>Hello World!</h2>
+						<p>Welcome to the Kohana-Bootstrap. </p>
+					</div>
+				</div>
+				<div class="span4 pull-right">
+					<form methond="post" action="" class="form-horizontal span3 form-actions form-login pull-right">
+						<div class="control-group"><input type="text" name="username" placeholder="用户名或邮箱"></div>
+						<div class="control-group"><input type="password" name="password" placeholder="密码"></div>
+						<div class="control-group">
+							<div class="pull-left">
+								<label class="checkbox pull-left"><input type="checkbox">记住我</label>&nbsp;·&nbsp;<a href="#">忘记密码?</a>
+							</div>
+							<button type="submit" class="btn btn-primary pull-right">登录</button>
+						</div>
+					</form>
+					<form methond="post" action="" class="form-horizontal span3 form-actions form-register pull-right">
+						<div class="control-group"><input type="text" name="username" placeholder="用户名"></div>
+						<div class="control-group"><input type="text" name="mail" placeholder="邮箱"></div>
+						<div class="control-group"><input type="password" name="password" placeholder="密码"></div>
+						<div class="control-group"><button type="submit" class="btn btn-success pull-right">注册</button></div>
+					</form>
+				</div>
 			</div>
-			<div class="span4">
-				<h2>Heading</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-				<p><a class="btn" href="#">View details &raquo;</a></p>
-			</div>
 		</div>
-
-		<hr>
 
 		<footer>
 			<p>&copy; Kohana-Bootstrap 2012</p>
