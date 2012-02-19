@@ -1,0 +1,26 @@
+/*
+ * Copyright 2012, GongNation
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ */
+
+/* common*/
+.container {
+	width: 960px;
+}
+/* common end*/
+
+/* header */
+#header {
+}
+
+/* header end*/
+
+/* content */
+#container {
+}
+/* content */
+
+/* footer */
+#footer {
+}
+/* footer */
