@@ -8,7 +8,7 @@
  */
 class Controller_Index extends Controller_Template {
 
-	public $template = 'default/template';
+	public $template = 'default/index';
 
 	// Routes
 	protected $media;
@@ -35,11 +35,11 @@ class Controller_Index extends Controller_Template {
 		parent::before();
 	}
 	
-	public function action_test()
+	public function action_index()
 	{
 	}
 	// Index
-	public function action_index()
+	public function action_index2()
 	{
 		$this->template->title = "index";
 

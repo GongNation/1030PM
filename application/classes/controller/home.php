@@ -8,7 +8,7 @@
  */
 class Controller_Home extends Controller_Template {
 
-	public $template = 'default/template';
+	public $template = 'default/tpl_game';
 
 	// Routes
 	protected $media;
@@ -34,11 +34,11 @@ class Controller_Home extends Controller_Template {
 
 		parent::before();
 	}
-	public function action_test()
+	public function action_index()
 	{
 	}
 	// Index
-	public function action_index()
+	public function action_index1()
 	{
 		$this->template->title = "Home";
 		$username = $this->request->param('username');
