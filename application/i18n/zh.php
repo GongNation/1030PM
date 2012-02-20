@@ -2,18 +2,25 @@
 
 return array
 (
-	// menu
-	'Home' 			=> '首页',
-	'Archives' 		=> '文章',
-	'Demos' 		=> '演示',
-	'About'			=> '关于',
-	'Contact Me'	=> '联系我',
+	// nav
+	'Home' 				=> '首页',
+	'About'				=> '关于',
+	'Contact'			=> '联系',
 	
 	// sign up and login
-	'Username'		=> '帐号',
-	'Password'		=> '密码',
-	'Mail'			=> '邮箱',
-	'Login'			=> '登录',
-	'Logout'		=> '退出',
-	'Sign up'		=> '注册',
+	'Username or Email'	=> '用户名或邮箱',
+	'Username'			=> '用户名',
+	'Password'			=> '密码',
+	'Email'				=> '邮箱',
+	'Login'				=> '登录',
+	'Logout'			=> '退出',
+	'Sign up'			=> '注册',
+	'Remember me'		=> '记住我',
+	'Forget password'	=> '忘记密码?',
+	
+	// welcome
+	'Welcome words'		=> '欢迎来到Kohana-Bootstrap.',
+	
+	// language
+	'Set language'		=> '语言：简体中文',
 );

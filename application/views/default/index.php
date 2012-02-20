@@ -54,13 +54,19 @@
 			<div class="container">
 				<a class="brand" href="#">Kohana-Bootstrap</a>
 				<ul class="nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
+					<li class="active"><a href="#"><?php echo __('Home') ?></a></li>
+					<li><a href="#"><?php echo __('About') ?></a></li>
+					<li><a href="#"><?php echo __('Contact') ?></a></li>
 				</ul>
-				<form action="" class="pull-right navbar-search">
-					<input type="text" class="search-query">
-				</form>
+				<ul class="nav pull-right">
+					<li class="dropdown" id="fat-menu">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#"><?php echo __('Set language') ?><b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="<?php echo Kohana::$base_url.'?lang=zh' ?>" title="简体中文">简体中文</a></li>
+							<li><a href="<?php echo Kohana::$base_url.'?lang=en' ?>" title="English">English</a></li>
+						</ul>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -72,25 +78,45 @@
 				<div class="span8">
 					<div class="welcome-img">
 						<h2>Hello World!</h2>
-						<p>Welcome to the Kohana-Bootstrap. </p>
+						<p><?php echo __('Welcome words') ?></p>
 					</div>
 				</div>
 				<div class="span4 pull-right">
-					<form methond="post" action="" class="form-horizontal span3 form-actions form-login pull-right">
-						<div class="control-group"><input type="text" name="username" placeholder="用户名或邮箱"></div>
-						<div class="control-group"><input type="password" name="password" placeholder="密码"></div>
+					<form methond="post" action="<?php echo Kohana::$base_url.Route::get('login')->uri() ?>" class="form-horizontal span3 form-actions form-login pull-right">
+						<div class="control-group">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-envelope"></i></span><input type="text" name="login" placeholder="<?php echo __('Username or Email')?>">
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-lock"></i></span><input type="password" name="password" placeholder="<?php echo __('Password')?>">
+							</div>
+						</div>
 						<div class="control-group">
 							<div class="pull-left">
-								<label class="checkbox pull-left"><input type="checkbox">记住我</label>&nbsp;·&nbsp;<a href="#">忘记密码?</a>
+								<label class="checkbox pull-left"><input type="checkbox" name="remember" value="1"><?php echo __('Remember me')?></label>&nbsp;·&nbsp;<a href="#"><?php echo __('Forget password')?></a>
 							</div>
-							<button type="submit" class="btn btn-primary pull-right">登录</button>
+							<button type="submit" class="btn btn-primary pull-right"><?php echo __('Login')?></button>
 						</div>
 					</form>
 					<form methond="post" action="" class="form-horizontal span3 form-actions form-register pull-right">
-						<div class="control-group"><input type="text" name="username" placeholder="用户名"></div>
-						<div class="control-group"><input type="text" name="mail" placeholder="邮箱"></div>
-						<div class="control-group"><input type="password" name="password" placeholder="密码"></div>
-						<div class="control-group"><button type="submit" class="btn btn-success pull-right">注册</button></div>
+						<div class="control-group">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-user"></i></span><input type="text" name="username" placeholder="<?php echo __('Username')?>">
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-envelope"></i></span><input type="text" name="email" placeholder="<?php echo __('Email')?>">
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-lock"></i></span><input type="password" name="password" placeholder="<?php echo __('Password')?>">
+							</div>
+						</div>
+						<div class="control-group"><button type="submit" class="btn btn-success pull-right"><?php echo __('Sign up')?></button></div>
 					</form>
 				</div>
 			</div>

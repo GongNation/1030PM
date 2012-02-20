@@ -18,6 +18,12 @@ a:focus,
 	outline-offset: 0px;
 }
 
+input[type="text"],
+input[type="password"] {
+	outline: 0\9;
+	outline-offset: 0px\9;
+}
+
 .container {
 	width: 960px;
 }
@@ -28,7 +34,7 @@ a:focus,
 
 .welcome-img {
 	width: 500px;
-	height: 375px;
+	height: 374px;
 	background-image: url(../images/welcome_bg.jpg);
 	-webkit-border-radius: 4px 4px 4px 4px;
 	-moz-border-radius: 4px 4px 4px 4px;
@@ -41,6 +47,14 @@ a:focus,
 	border-radius: 4px 4px 4px 4px;
 	padding-bottom: 0;
 	margin-top: 0px;
+}
+.welcome-page input[type="text"],
+.welcome-page input[type="password"] {
+	width: 183px;
+	+width: 181px;
+}
+.welcome-page .control-group {
+	margin-bottom: 14px;
 }
 /* common end*/
 
@@ -56,6 +70,7 @@ a:focus,
 /* content */
 
 /* footer */
-#footer {
+footer {
+	text-align: center;
 }
 /* footer */
