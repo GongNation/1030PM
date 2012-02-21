@@ -18,6 +18,10 @@ a:focus,
 	outline-offset: 0px;
 }
 
+a:hover {
+	_outline: 0;
+}
+
 input[type="text"],
 input[type="password"] {
 	outline: 0\9;
@@ -41,7 +45,7 @@ input[type="password"] {
 	border-radius: 4px 4px 4px 4px;
 }
 
-.form-login, .form-register {
+.form-login, .form-signup {
 	-webkit-border-radius: 4px 4px 4px 4px;
 	-moz-border-radius: 4px 4px 4px 4px;
 	border-radius: 4px 4px 4px 4px;

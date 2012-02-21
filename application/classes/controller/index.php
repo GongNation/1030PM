@@ -13,21 +13,30 @@ class Controller_Index extends Controller_Template {
 	// Routes
 	protected $media;
 	protected $index;
+	public $login_error = FALSE;
+	public $signup_error = FALSE;
 
 	public function before()
 	{
 		if (in_array($this->request->action(), array('media', 'ajax')))
 		{
-			// Do not template media files
+			// media和ajax页面不需要页面模版
 			$this->auto_render = FALSE;
 		}
 		else
 		{
-			// Grab the necessary routes
+			// 获取必要的route
 			$this->media = Route::get('media');
 			$this->index = Route::get('default');
 		}
-
+		
+		// 是否已登录
+		$username = Model_User::is_login();
+		if ($username)
+		{
+			$this->request->redirect($username);
+		}
+		
 		// I18n
 		$lang = $this->request->query('lang');
 		Model_Secure::set_lang($lang);
@@ -35,91 +44,72 @@ class Controller_Index extends Controller_Template {
 		parent::before();
 	}
 	
+	// Index
 	public function action_index()
 	{
-	}
-	// Index
-	public function action_index2()
-	{
-		$this->template->title = "index";
+		$this->template->title = "Kohana-Bootstrap";
 
-		$is_login = Model_Secure::is_login();
-		if ($is_login)
-		{
-			$this->request->redirect($is_login);
-		}
-		else
-		{
-			$this->template->view = View::factory('default/login');
-		}
+		$this->template->login_error = $this->login_error;
+		$this->template->signup_error = $this->signup_error;
 	}
 
 	// Login
 	public function action_login()
 	{
-		$this->template->title = "login";
 		if (count($this->request->post()) == 0)
 		{
-			$this->template->view = View::factory('default/login');
+			$this->request->redirect();
 		}
 		else
 		{
-			$username = $this->request->post('username');
+			$login = $this->request->post('login');
 			$password = $this->request->post('password');
-			$login = Model_Secure::login($username, $password);
-			if ($login)
+			$login = Model_User::login($login, $password);
+			if (!in_array($login, array(1, 2, 3)))
 			{
-				$this->request->redirect($username);
+				$this->request->redirect($login);
 			}
-			else
-			{
-				$this->template->view = 'Login failed!'.$username.$password;
-			}
-			
+			$this->login_error = $login;
+			$this->action_index();
 		}
 	}
 
 	// Logout
 	public function action_logout()
 	{
-		Session::instance()->delete('username');
+		Model_User::logout();
 		$this->request->redirect();
 	}
 
 	// Signup
 	public function action_signup()
 	{
-		$this->template->title = "Signup";
 		if (count($this->request->post()) == 0)
 		{
-			$this->template->view = View::factory('default/signup');
+			$this->request->redirect();
 		}
 		else
 		{
 			$username 	= $this->request->post('username');
 			$password 	= $this->request->post('password');
-			$mail 		= $this->request->post('mail');
+			$email 		= $this->request->post('email');
 			
-			$ModelSecure = Model::factory('secure');
-			$signup = $ModelSecure->signup($username, $password, $mail);
-			if ( ! $signup)
+			$signup = Model_User::signup($username, $password, $email);
+			if ($signup === FALSE)
 			{
-				// Unkown error
-				$this->template->view = 'Signup failed! Unkown error!'.$username.$password.$mail;
+				// 注册失败
+				$this->request->redirect();
 			}
-			else if (is_array($signup))
+			else if ($signup > 0)
 			{
-				// The user was signed up already
-				$this->template->view = 'Signup failed! '.$username.' was signed up already!';
+				// 注册成功
+				$session = Session::instance();
+				$session->set('username', $username);
+				$session->set('id', $signup);
+				$this->request->redirect($username);
 			}
-			else if (is_numeric($signup))
-			{
-				// Insert success
-				$ModelSecure->login($username, $password);
-				$this->template->title = "Home";
-				$this->template->view = View::factory('default/home')
-				->bind('username', $username);
-			}
+			$this->signup_error = $signup;
+			$this->action_index();
 		}
 	}
 
@@ -160,22 +150,11 @@ class Controller_Index extends Controller_Template {
 			// Get the media route
 			$media = Route::get('media');
 
-			// Add styles
-			$this->template->styles = array(
-				$media->uri(array('file' => 'css/form.css')) => 'screen',
-				$media->uri(array('file' => 'css/default.css')) => 'screen',
-			);
-
 			// Add scripts
 			$this->template->scripts = array(
-				$media->uri(array('file' => 'js/html5.js')),
+				$media->uri(array('file' => 'js/index.js')),
 			);
 
-			// Add icon
-			$this->template->icon = $media->uri(array('file' => 'images/favicon.ico'));
-
-			// Add languages
-			//$this->template->translations = Kohana::message('userguide', 'translations');
 		}
 
 		return parent::after();
