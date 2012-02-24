@@ -3,9 +3,25 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  */
 
-/* common*/
+::-webkit-selection {
+	background: #fe57a1;
+	color: #fff;
+	text-shadow: none;
+}
+::-moz-selection {
+	background: #fe57a1;
+	color: #fff;
+	text-shadow: none;
+}
+::selection {
+	background: #fe57a1;
+	color: #fff;
+	text-shadow: none;
+}
 body {
 	background-color: #bd664d;
+	padding-bottom: 40px;
+	padding-top: 60px;
 }
 
 input[type="file"]:focus,
@@ -28,24 +44,23 @@ input[type="password"] {
 	outline-offset: 0px\9;
 }
 
+.navbar .nav > li > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #222222;
+}
 .container {
 	width: 960px;
 }
+
+/* index */
 .welcome-page {
-	padding: 100px 0px;
+	padding: 40px 0px 60px 0px;
 	background-color: #bd664d;
 }
 
-.welcome-img {
-	width: 500px;
-	height: 374px;
-	background-image: url(../images/welcome_bg.jpg);
-	-webkit-border-radius: 4px 4px 4px 4px;
-	-moz-border-radius: 4px 4px 4px 4px;
-	border-radius: 4px 4px 4px 4px;
-}
-
-.form-login, .form-signup {
+.form-login,
+.form-signup {
 	-webkit-border-radius: 4px 4px 4px 4px;
 	-moz-border-radius: 4px 4px 4px 4px;
 	border-radius: 4px 4px 4px 4px;
@@ -60,21 +75,50 @@ input[type="password"] {
 .welcome-page .control-group {
 	margin-bottom: 14px;
 }
-/* common end*/
-
-/* header */
-#header {
+#welcome-Carousel {
+	width: 500px;
+}
+#welcome-Carousel .item img {
+	-webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
+}
+#welcome-Carousel .item .carousel-caption {
+	-webkit-border-radius: 0px 0px 4px 4px;
+	-moz-border-radius: 0px 0px 4px 4px;
+	border-radius: 0px 0px 4px 4px;
 }
 
-/* header end*/
-
-/* content */
-#container {
+/* home */
+.navbar .nav > li > .custom-avatar-40-40 {
+	padding: 0px;
+	line-height: 0px;
 }
-/* content */
-
+.custom-avatar-40-40 img {
+	height: 40px;
+	width: 40px;
+}
+.content {
+	width: 770px;
+	min-height: 500px;
+}
+.sidebar {
+	width: 189px;
+	border-left:1px solid #333333;
+	margin-left: 0px;
+	min-height: 500px;
+}
 /* footer */
-footer {
+.footer {
+	margin-top: 60px;
+}
+.footer p {
 	text-align: center;
+}
+.footer p a {
+	color: #333333;
+}
+.footer p a:hover {
+	color: #ffffff;
 }
 /* footer */

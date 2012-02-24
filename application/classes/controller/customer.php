@@ -1,57 +1,59 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Kohana user guide and api browser.
+ * Customer.
  *
- * @package    Kohana/Userguide
+ * @package    Kohana-Bootstrap/Customer
  * @category   Controllers
- * @author     Kohana Team
+ * @author     GongNation
  */
-class Controller_Home extends Controller_Template {
+class Controller_Customer extends Controller_Template {
 
-	public $template = 'default/tpl_game';
+	public $template = 'default/customer/home';
 
 	// Routes
 	protected $media;
-	protected $index;
+	protected $home;
+	protected $session;
 
 	public function before()
 	{
 		if (in_array($this->request->action(), array('media', 'ajax')))
 		{
-			// Do not template media files
+			// media和ajax页面不需要页面模版
 			$this->auto_render = FALSE;
 		}
 		else
 		{
-			// Grab the necessary routes
+			// 获取必要的route
 			$this->media = Route::get('media');
-			$this->index = Route::get('default');
+			$this->home = Route::get('default');
+			
+			// 判断用户是否已登录，如未登录则重定向到首页
+			$username = Model_User::is_login();
+			if (!$username)
+			{
+				$this->request->redirect();
+			}
+			$this->session = Session::instance();
 		}
-
-		// I18n
-		$lang = $this->request->query('lang');
-		Model_Secure::set_lang($lang);
 
 		parent::before();
 	}
+
+	// Index
 	public function action_index()
 	{
+		$this->template->title = "Home Page";
+		$username_get = $this->request->param('username');
+		$this->template->username_get = $username_get;
+		$this->template->username_session = $this->session->get('username');
 	}
-	// Index
-	public function action_index1()
-	{
-		$this->template->title = "Home";
-		$username = $this->request->param('username');
 
-		$is_login = Model_Secure::is_login($username);
-		if ($is_login)
-		{
-			$this->template->username = $username;
-		}
-		else
-		{
-			$this->request->redirect();
-		}
+	// Logout
+	public function action_logout()
+	{
+		Model_User::logout();
+		$this->request->redirect();
 	}
 
 	// Archives
@@ -111,23 +113,29 @@ class Controller_Home extends Controller_Template {
 
 			// Add styles
 			$this->template->styles = array(
-				$media->uri(array('file' => 'css/form.css')) => 'screen',
-				$media->uri(array('file' => 'css/default.css')) => 'screen',
 			);
 
 			// Add scripts
 			$this->template->scripts = array(
-				$media->uri(array('file' => 'js/html5.js')),
 			);
 
-			// Add icon
-			$this->template->icon = $media->uri(array('file' => 'images/favicon.ico'));
+			// I18n
+			$languages = Kohana::message('languages');
+			$lang = $this->request->query('lang');
+			if ($lang !== NULL)
+			{
+				// 若$lang不在定义的列表中，则返回404状态
+				if (!array_key_exists($lang, $languages)) $this->response->status(404);
+				
+				// 在cookie中设置语言
+				Model_User::set_lang($lang);
+			}
 
 			// Add languages
-			//$this->template->translations = Kohana::message('userguide', 'translations');
+			$this->template->languages = $languages;
 		}
 
 		return parent::after();
 	}
 
-} // End Userguide
+} // End

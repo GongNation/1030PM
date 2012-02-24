@@ -99,7 +99,7 @@ class Model_User extends Model_Database {
 * 用户登录
 *
 */
-	static function login ($login, $password)
+	static function login ($login, $password, $remember)
 	{
 		// $login为email
 		if (Valid::email($login))
@@ -182,15 +182,7 @@ class Model_User extends Model_Database {
 */
 	static function set_lang ($lang)
  	{
-		$lang_cookie = Cookie::get('lang');
-		if ($lang === NULL AND $lang_cookie !== NULL)
-		{
-			I18n::lang($lang_cookie);
-		}
-		elseif ($lang !== NULL)
-		{
-			Cookie::set('lang', $lang);
-			I18n::lang($lang);
-		}
+		Cookie::set('lang', $lang);
+		I18n::lang($lang);
 	}
 }

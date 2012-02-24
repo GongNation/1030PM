@@ -1,52 +1,59 @@
 <?php
 
-// Static file serving (CSS, JS, images)
-Route::set('media', '(<type>/)media(/<file>)', array('type' => '(m|pad)', 'file' => '.+'))
+// 静态文件 (CSS, JS, images)
+Route::set('media', 'media(/<file>)', array('file' => '.+'))
 	->defaults(array(
-		'controller' => 'index',
-		'action'     => 'media',
-		'type'       => NULL,
-		'file'       => NULL,
+		'controller'	=> 'index',
+		'action'		=> 'media',
+		'file'			=> NULL,
 	));
 
-Route::set('ui', 'ui')
-	->defaults(array(
-		'controller' => 'errors',
-		'action'     => 'ui',
-	));
-
+// 用户注册
 Route::set('signup', 'signup')
 	->defaults(array(
-		'controller' => 'index',
-		'action'     => 'signup',
+		'controller'	=> 'index',
+		'action'		=> 'signup',
 	));
 
+// 用户登录
 Route::set('login', 'login')
 	->defaults(array(
-		'controller' => 'index',
-		'action'     => 'login',
+		'controller'	=> 'index',
+		'action'		=> 'login',
 	));
-
+	
+// 用户退出
 Route::set('logout', 'logout')
 	->defaults(array(
-		'controller' => 'index',
-		'action'     => 'logout',
+		'controller'	=> 'customer',
+		'action'		=> 'logout',
 	));
 
-Route::set('customer', '<username>')
+// 用户的个人主页
+Route::set('home', '<username>')
 	->defaults(array(
-		'controller' => 'home',
-		'action'     => 'index',
+		'controller'	=> 'customer',
+		'action'		=> 'index',
 	));
 
+// 用户个人设置
+Route::set('settings', 'settings/<action>', array('action' => '(account|system|theme)'))
+	->defaults(array(
+		'controller'	=> 'customer',
+		'action'		=> NULL,
+	));
+
+// 默认
 Route::set('default', '(<index>/)(<controller>(/<action>))', array('index' => '(index.php|index.html)'))
 	->defaults(array(
-		'controller' => 'index',
-		'action'     => 'index',
-		'index'		 => NULL,
+		'controller'	=> 'index',
+		'action'		=> 'index',
+		'index'			=> NULL,
 	));
-/* Route::set('errors', '<path>', array('path' => '.+'))
+
+// 404错误页面
+Route::set('error', '<path>', array('path' => '.+'))
 	->defaults(array(
-		'controller' => 'errors',
-		'action'     => '404',
-	)); */
+		'controller'	=> 'error',
+		'action'		=> '404',
+	));

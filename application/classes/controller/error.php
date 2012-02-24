@@ -1,14 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Kohana user guide and api browser.
+ * Error.
  *
- * @package    Kohana/Userguide
+ * @package    Kohana-Bootstrap/Error
  * @category   Controllers
- * @author     Kohana Team
+ * @author     GongNation
  */
-class Controller_Errors extends Controller_Template {
+class Controller_Error extends Controller_Template {
 
-	public $template = 'default/ui';
+	public $template = 'default/error/404';
 
 	// Routes
 	protected $media;
@@ -40,12 +40,7 @@ class Controller_Errors extends Controller_Template {
 		$this->request->status = 404;
 		$this->template->title = "error 404";
 		//$this->request->response = View::factory('errors/404');
-		$this->template->view = View::factory('errors/404');
-	}
-
-	public function action_ui()
-	{
-
+		$this->template->view = View::factory('404');
 	}
 
 	public function action_media()

@@ -16,7 +16,7 @@ return array
 	'Log out'						=> '退出',
 	'Sign up'						=> '注册',
 	'Remember me'					=> '记住我',
-	'Forget password'				=> '忘记密码?',
+	'Forget password?'				=> '忘记密码?',
 	'Username dose not exists!'		=> '用户名不存在!',
 	'Username has been registered!'	=> '用户名已被注册!',
 	'Email dose not exists!'		=> '邮箱不存在!',
@@ -24,8 +24,8 @@ return array
 	'Password is incorrect!'		=> '忘记密码不正确!',
 	
 	// welcome
-	'Welcome words'		=> '欢迎来到Kohana-Bootstrap.',
+	'Welcome to Kohana-Bootstrap'	=> '欢迎来到Kohana-Bootstrap.',
 	
 	// language
-	'Set language'		=> '语言:简体中文',
+	'language:English'				=> '语言:简体中文',
 );

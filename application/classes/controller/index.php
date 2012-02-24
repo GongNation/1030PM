@@ -1,14 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Kohana user guide and api browser.
+ * Index.
  *
- * @package    Kohana/Userguide
+ * @package    Kohana-Bootstrap/Index
  * @category   Controllers
- * @author     Kohana Team
+ * @author     GongNation
  */
 class Controller_Index extends Controller_Template {
 
-	public $template = 'default/index';
+	public $template = 'default/index/index';
 
 	// Routes
 	protected $media;
@@ -18,7 +18,8 @@ class Controller_Index extends Controller_Template {
 
 	public function before()
 	{
-		if (in_array($this->request->action(), array('media', 'ajax')))
+		$action = $this->request->action();
+		if ($action == 'media')
 		{
 			// media和ajax页面不需要页面模版
 			$this->auto_render = FALSE;
@@ -28,18 +29,15 @@ class Controller_Index extends Controller_Template {
 			// 获取必要的route
 			$this->media = Route::get('media');
 			$this->index = Route::get('default');
+			
+			if ($action == 'index')
+			{
+				// 判断用户是否已登录，如已登录则重定向到其个人主页
+				$username = Model_User::is_login();
+				if ($username) $this->request->redirect($username);
+			}
+			
 		}
-		
-		// 是否已登录
-		$username = Model_User::is_login();
-		if ($username)
-		{
-			$this->request->redirect($username);
-		}
-		
-		// I18n
-		$lang = $this->request->query('lang');
-		Model_Secure::set_lang($lang);
 
 		parent::before();
 	}
@@ -64,7 +62,8 @@ class Controller_Index extends Controller_Template {
 		{
 			$login = $this->request->post('login');
 			$password = $this->request->post('password');
-			$login = Model_User::login($login, $password);
+			$remember = $this->request->post('remember');
+			$login = Model_User::login($login, $password, $remember);
 			if (!in_array($login, array(1, 2, 3)))
 			{
 				$this->request->redirect($login);
@@ -72,13 +71,6 @@ class Controller_Index extends Controller_Template {
 			$this->login_error = $login;
 			$this->action_index();
 		}
-	}
-
-	// Logout
-	public function action_logout()
-	{
-		Model_User::logout();
-		$this->request->redirect();
 	}
 
 	// Signup
@@ -155,9 +147,25 @@ class Controller_Index extends Controller_Template {
 				$media->uri(array('file' => 'js/index.js')),
 			);
 
+			// I18n
+			$languages = Kohana::message('languages');
+			$lang = $this->request->query('lang');
+			if ($lang !== NULL)
+			{
+				// 若$lang不在定义的列表中，则返回404状态
+				if (!array_key_exists($lang, $languages)) $this->response->status(404);
+				
+				// 在cookie中设置语言
+				Model_User::set_lang($lang);
+			}
+
+			$this->template->lang = I18n::$lang;
+
+			// Add languages
+			$this->template->languages = $languages;
 		}
 
 		return parent::after();
 	}
 
-} // End Userguide
+} // End

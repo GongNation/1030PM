@@ -16,7 +16,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================== */
-
+ 
+/*
+ * changelog 
+ * 2012.02.23 02:07 line330
+ * if (!$next.length) return => if (!$next.length) $next = this.$element.find('.item').first()
+ */
 !function( $ ) {
 
   $(function () {
@@ -323,7 +328,7 @@
         , fallback  = type == 'next' ? 'first' : 'last'
         , that = this
 
-      if (!$next.length) return
+      if (!$next.length) $next = this.$element.find('.item').first()
 
       this.sliding = true
 
