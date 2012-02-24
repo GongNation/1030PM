@@ -2,10 +2,15 @@
 
 return array
 (
-	// nav
+	// footer
 	'Home' 							=> '首页',
 	'About'							=> '关于',
 	'Contact'						=> '联系',
+	'Jobs'							=> '工作',
+	'Service'						=> '条款',
+	'Privacy'						=> '隐私',
+	'Feedback'						=> '意见',
+	
 	
 	// sign up and login
 	'Username or Email'				=> '用户名或邮箱',

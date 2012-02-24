@@ -30,15 +30,15 @@
 			<div class="container">
 				<a class="brand" href="#">Kohana-Bootstrap</a>
 				<ul class="nav">
-					<li class="active"><a href="<?php echo $username_get ?>" title="<?php echo __('Home') ?>"><i class="icon-home icon-white"></i></a></li>
-					<li><a href="<?php echo __('Profile') ?>" title="<?php echo __('Profile') ?>"><i class="icon-user icon-white"></i></a></li>
+					<li class="active"><a href="<?php echo $username_get ?>" title="<?php echo __('Home') ?>"><i class="icon-home"></i></a></li>
+					<li><a href="<?php echo __('Profile') ?>" title="<?php echo __('Profile') ?>"><i class="icon-user"></i></a></li>
 				</ul>
 				<form method="get" class="navbar-search">
 					<input type="text" name="home-search" class="search-query">
 				</form>
 				<ul class="nav pull-right">
 					<li class="active"><a href="<?php echo $username_get ?>"><?php echo $username_get ?></a></li>
-					<li><a href="/inbox" title="inbox"><i class="icon-envelope icon-white"></i></a></li>
+					<li><a href="/inbox" title="inbox"><i class="icon-envelope"></i></a></li>
 					<li id="system-menu-in"></li>
 				</ul>
 			</div>

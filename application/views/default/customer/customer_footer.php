@@ -2,6 +2,10 @@
 			<p>
 				<a href="/about" title="<?php echo __('About') ?>"><?php echo __('About') ?></a>&nbsp;·
 				<a href="/contact" title="<?php echo __('Contact') ?>"><?php echo __('Contact') ?></a>&nbsp;·
+				<a href="/jobs" title="<?php echo __('Jobs') ?>"><?php echo __('Jobs') ?></a>&nbsp;·
+				<a href="/service" title="<?php echo __('Service') ?>"><?php echo __('Service') ?></a>&nbsp;·
+				<a href="/privacy" title="<?php echo __('Privacy') ?>"><?php echo __('Privacy') ?></a>&nbsp;·
+				<a href="/feedback" title="<?php echo __('Feedback') ?>"><?php echo __('Feedback') ?></a>&nbsp;·
 				&copy; Kohana-Bootstrap 2012
 			</p>
 		</div>
@@ -18,7 +22,7 @@
 	<script type="text/javascript">
 
 $(document).ready(function(e) {
-	var system-menu-in = new PathMenuObj('pathmenu',{
+	var menu_all_in = new PathMenuObj('pathmenu',{
 		'PathPosition': {position:'relative', top:0,right:0, width:40, height:40},
 		'mainButton': [
 			{'bg':'','css':'','cover':'/media/images/avatar.jpg','html':''},
@@ -31,7 +35,7 @@ $(document).ready(function(e) {
 			{'bg':'','css':'','cover':'<i class="icon-map-marker icon-white"></i>','href':'#','target':''},
 			{'bg':'','css':'','cover':'<i class="icon-picture icon-white"></i>','href':'#','target':''},
 			{'bg':'','css':'','cover':'<i class="icon-pencil icon-white"></i>','href':'#','target':''},
-			{'bg':'','css':'','cover':'<i class="icon-off icon-white"></i>','href':'#','target':''}
+			{'bg':'','css':'','cover':'<i class="icon-off icon-white"></i>','href':'/logout','target':''}
 			//......
 		],
 		'ICount': 6,

@@ -90,13 +90,8 @@ input[type="password"] {
 }
 
 /* home */
-.navbar .nav > li > .custom-avatar-40-40 {
-	padding: 0px;
-	line-height: 0px;
-}
-.custom-avatar-40-40 img {
-	height: 40px;
-	width: 40px;
+.navbar .nav > li > a:hover i {
+	background-image: url("../plugin/bootstrap/img/glyphicons-halflings-white.png");
 }
 .content {
 	width: 770px;

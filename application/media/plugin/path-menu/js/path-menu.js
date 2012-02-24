@@ -112,7 +112,7 @@ var PathMenuObj = function(classname,options){
 			if(mainButton[0]['css']!='') $(this).css(mainButton[0]['css']);
 			if(mainButton[0]['cover']!='') $(this).children().children().attr('src',mainButton[0]['cover']);
 			if(mainButton[0]['html']!='') $(this).children().html(mainButton[0]['html']);
-			$(this).click(function(){PathRun(PathMenu)});		
+			$(this).click(function(){PathRun(PathMenu)});
 		}
 		//Item
 		else if ($(this).hasClass('path-link')){
