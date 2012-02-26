@@ -8,7 +8,7 @@
  */
 class Controller_Error extends Controller_Template {
 
-	public $template = 'default/error/404';
+	public $template = 'default/tpl_index';
 
 	// Routes
 	protected $media;
@@ -39,6 +39,7 @@ class Controller_Error extends Controller_Template {
 	{
 		$this->request->status = 404;
 		$this->template->title = "error 404";
+		$this->template->view = View::factory('default/404');
 	}
 
 	public function action_media()

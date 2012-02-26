@@ -37,11 +37,11 @@ Route::set('settings', 'settings/<action>', array('action' => '(account|system|t
 	));
 
 // 默认
-//Route::set('default', '(<controller>(/<action>))')
-//	->defaults(array(
-//		'controller'	=> 'index',
-//		'action'		=> 'index',
-//	));
+Route::set('default', '(<controller>(/<action>))')
+	->defaults(array(
+		'controller'	=> 'index',
+		'action'		=> 'index',
+	));
 
 // 404错误页面
 Route::set('error', '<path>', array('path' => '.+'))

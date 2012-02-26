@@ -36,8 +36,20 @@ class Controller_Customer extends Controller_Template {
 		parent::before();
 	}
 
-	// Index
+// Index
 	public function action_index()
+	{
+	}
+	
+	// Profile
+	public function action_home()
+	{
+		$this->template->title = "Home Page";
+		$this->template->username_session = $this->session->get('username');
+	}
+	
+	// Index
+	public function action_profile()
 	{
 		$this->template->title = "Home Page";
 		$username_get = $this->request->param('username');

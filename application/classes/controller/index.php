@@ -8,7 +8,7 @@
  */
 class Controller_Index extends Controller_Template {
 
-	public $template = 'default/index/index';
+	public $template = 'default/tpl_index';
 
 	protected $login_error = FALSE;
 	protected $signup_error = FALSE;
@@ -38,7 +38,7 @@ class Controller_Index extends Controller_Template {
 		$is_login = Model_User::is_login();
 		if ($is_login)
 		{
-			$request = Request::factory('customer');
+			$request = Request::factory('customer/home');
 			$response = $request->execute()->send_headers()->body();
 			echo $response;
 			exit;
@@ -47,6 +47,7 @@ class Controller_Index extends Controller_Template {
 		$this->template->title = "Kohana-Bootstrap";
 		$this->template->login_error = $this->login_error;
 		$this->template->signup_error = $this->signup_error;
+		$this->template->view = View::factory('default/index');
 	}
 
 	// Login
@@ -108,6 +109,48 @@ class Controller_Index extends Controller_Template {
 			$this->signup_error = $signup;
 			$this->action_index();
 		}
+	}
+
+	// About
+	public function action_about()
+	{
+		$this->template->title = __('About');
+		$this->template->view = View::factory('default/about');
+	}
+
+	// Contact
+	public function action_contact()
+	{
+		$this->template->title = __('Contact');
+		$this->template->view = View::factory('default/contact');
+	}
+
+	// Jobs
+	public function action_jobs()
+	{
+		$this->template->title = __('Jobs');
+		$this->template->view = View::factory('default/jobs');
+	}
+
+	// Service
+	public function action_service()
+	{
+		$this->template->title = __('Service');
+		$this->template->view = View::factory('default/service');
+	}
+
+	// Privacy
+	public function action_privacy()
+	{
+		$this->template->title = __('Privacy');
+		$this->template->view = View::factory('default/privacy');
+	}
+
+	// Feedback
+	public function action_feedback()
+	{
+		$this->template->title = __('Feedback');
+		$this->template->view = View::factory('default/feedback');
 	}
 
 	public function action_media()

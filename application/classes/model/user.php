@@ -187,12 +187,16 @@ class Model_User extends Model_Database {
 *
 */
 	static function set_lang()
- 	{
+	{
 		$lang = Request::current()->query('lang');
 		if (array_key_exists($lang, Kohana::message('languages')))
 		{
 			Cookie::set('lang', $lang);
 			I18n::lang($lang);
+		}
+		else
+		{
+			I18n::lang(Cookie::get('lang'));
 		}
 	}
 }
