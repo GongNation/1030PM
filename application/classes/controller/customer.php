@@ -10,31 +10,27 @@ class Controller_Customer extends Controller_Template {
 
 	public $template = 'default/customer/home';
 
-	// Routes
-	protected $media;
-	protected $home;
 	protected $session;
 
 	public function before()
 	{
-		if (in_array($this->request->action(), array('media', 'ajax')))
+		if ($this->request->action() == 'media' AND !$this->request->is_ajax())
 		{
 			// media和ajax页面不需要页面模版
 			$this->auto_render = FALSE;
 		}
 		else
 		{
-			// 获取必要的route
-			$this->media = Route::get('media');
-			$this->home = Route::get('default');
-			
 			// 判断用户是否已登录，如未登录则重定向到首页
-			$username = Model_User::is_login();
-			if (!$username)
+			$is_login = Model_User::is_login();
+			if (!$is_login)
 			{
 				$this->request->redirect();
 			}
 			$this->session = Session::instance();
+
+			// 设置语言
+			Model_User::set_lang();
 		}
 
 		parent::before();
@@ -119,20 +115,8 @@ class Controller_Customer extends Controller_Template {
 			$this->template->scripts = array(
 			);
 
-			// I18n
-			$languages = Kohana::message('languages');
-			$lang = $this->request->query('lang');
-			if ($lang !== NULL)
-			{
-				// 若$lang不在定义的列表中，则返回404状态
-				if (!array_key_exists($lang, $languages)) $this->response->status(404);
-				
-				// 在cookie中设置语言
-				Model_User::set_lang($lang);
-			}
-
 			// Add languages
-			$this->template->languages = $languages;
+			$this->template->languages = Kohana::message('languages');
 		}
 
 		return parent::after();

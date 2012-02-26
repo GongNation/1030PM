@@ -154,12 +154,12 @@ if ( ! function_exists('__'))
 	 */
 	function __($string, array $values = NULL, $lang = 'en-us')
 	{
-		if ($lang !== I18n::$lang)
-		{
+//		if ($lang !== I18n::$lang) Edit 2012.02.26 01:30
+//		{
 			// The message and target languages are different
 			// Get the translation for this message
 			$string = I18n::get($string);
-		}
+//		}
 
 		return empty($values) ? $string : strtr($string, $values);
 	}

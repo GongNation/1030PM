@@ -17,18 +17,6 @@
 	<link type="text/css" href="/media/plugin/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 	-->
 	<link type="text/css" href="/media/css/base.css" rel="stylesheet">
-	<style>
-	<?php
-		switch ($lang)
-		{
-			case 'en-us';
-				echo '.language-list {min-width: 129px;}';
-			break;
-			default;
-				echo '.language-list {min-width: 112px;}';
-		}
-	?>
-	</style>
 	<!-- icon -->
 	<link type="image/x-icon" href="/media/images/favicon.ico" rel="shortcut icon" />
 	<link href="/media/images/apple-touch-icon.png" rel="apple-touch-icon">

@@ -25,12 +25,12 @@ class Controller_Error extends Controller_Template {
 		{
 			// Grab the necessary routes
 			$this->media = Route::get('media');
-			$this->index = Route::get('default');
+			$this->index = Route::get('error');
 		}
 
 		// I18n
 		$lang = $this->request->query('lang');
-		Model_Secure::set_lang($lang);
+		Model_User::set_lang($lang);
 
 		parent::before();
 	}
@@ -39,8 +39,6 @@ class Controller_Error extends Controller_Template {
 	{
 		$this->request->status = 404;
 		$this->template->title = "error 404";
-		//$this->request->response = View::factory('errors/404');
-		$this->template->view = View::factory('404');
 	}
 
 	public function action_media()

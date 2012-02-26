@@ -4,7 +4,7 @@ class Model_User extends Model_Database {
 * 通过Id获取user相关信息
 *
 */
-	static function get_user_by_id ($id)
+	static function get_user_by_id($id)
 	{
 		$query = DB::query(Database::SELECT, 'SELECT * FROM user WHERE id=:id ');
 		$query->param(':id', $id);
@@ -22,7 +22,7 @@ class Model_User extends Model_Database {
 * 通过username获取user相关信息
 *
 */
-	static function get_user_by_username ($username)
+	static function get_user_by_username($username)
  	{
 		$query = DB::query(Database::SELECT, 'SELECT * FROM user WHERE username=:username');
 		$query->param(':username', $username);
@@ -40,7 +40,7 @@ class Model_User extends Model_Database {
 * 通过email获取user相关信息
 *
 */
-	static function get_user_by_email ($email)
+	static function get_user_by_email($email)
 	{
 		$query = DB::query(Database::SELECT, 'SELECT * FROM user WHERE email=:email');
 		$query->param(':email', $email);
@@ -58,7 +58,7 @@ class Model_User extends Model_Database {
 * 用户注册
 *
 */
-	static function signup ($username, $password, $email)
+	static function signup($username, $password, $email)
  	{
 		$check_username = self::get_user_by_username($username);
 		$check_email = self::get_user_by_email($email);
@@ -72,8 +72,11 @@ class Model_User extends Model_Database {
 			list($insert_id, $affected_rows) = $query->execute();
 			if ($affected_rows == 1)
 			{
-				// 数据插入成功，返回user的Id
-				return $insert_id;
+				// 数据插入成功，设置session
+				$session = Session::instance();
+				$session->set('username', $username);
+				$session->set('id', $insert_id);
+				return TRUE;
 			}
 			// 数据插入失败
 			return FALSE;
@@ -99,7 +102,7 @@ class Model_User extends Model_Database {
 * 用户登录
 *
 */
-	static function login ($login, $password, $remember)
+	static function login($login, $password, $remember)
 	{
 		// $login为email
 		if (Valid::email($login))
@@ -135,6 +138,7 @@ class Model_User extends Model_Database {
 		$result = $query->execute();
 		if ($result->count() == 1)
 		{
+			// 登录成功
 			$userinfo_array = $result->as_array();
 			$username = $userinfo_array[0]['username'];
 			$id = $userinfo_array[0]['id'];
@@ -142,8 +146,8 @@ class Model_User extends Model_Database {
 			$session = Session::instance();
 			$session->set('username', $username);
 			$session->set('id', $id);
-			// 登录成功
-			return $username;
+			
+			return TRUE;
 		}
 		// 密码错误
 		return 3;
@@ -156,6 +160,7 @@ class Model_User extends Model_Database {
 	static function logout()
 	{
 		$session = Session::instance();
+		
 		$session->delete('username');
 		$session->delete('id');
 	}
@@ -164,7 +169,7 @@ class Model_User extends Model_Database {
 * 判断用户是否登录
 *
 */
-	static function is_login ()
+	static function is_login()
  	{
 		$username = Session::instance()->get('username');
 		if ($username === NULL)
@@ -172,17 +177,22 @@ class Model_User extends Model_Database {
 			// 没有登录过
 			return FALSE;
 		}
-		// 已经登录，返回username
-		return $username;
+		
+		// 已经登录
+		return TRUE;
 	}
 
 /**
 * 在cookie中保存用户的语言
 *
 */
-	static function set_lang ($lang)
+	static function set_lang()
  	{
-		Cookie::set('lang', $lang);
-		I18n::lang($lang);
+		$lang = Request::current()->query('lang');
+		if (array_key_exists($lang, Kohana::message('languages')))
+		{
+			Cookie::set('lang', $lang);
+			I18n::lang($lang);
+		}
 	}
 }

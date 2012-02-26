@@ -29,7 +29,7 @@
 					</div>
 				</div>
 				<div class="span4 pull-right">
-					<form method="post" action="<?php echo Kohana::$base_url.Route::get('login')->uri() ?>" class="form-horizontal span3 form-actions form-login pull-right">
+					<form method="post" action="<?php echo Kohana::$base_url.Route::get('index')->uri(array('action' => 'login')) ?>" class="form-horizontal span3 form-actions form-login pull-right">
 						<div class="control-group">
 							<div class="input-prepend" id="login-input-login">
 								<span class="add-on"><i class="icon-envelope"></i></span><input type="text" name="login" autocomplete="off" placeholder="<?php echo __('Username or Email')?>">
@@ -47,7 +47,7 @@
 							<button type="submit" class="btn btn-primary pull-right"><?php echo __('Log in')?></button>
 						</div>
 					</form>
-					<form method="post" action="<?php echo Kohana::$base_url.Route::get('signup')->uri() ?>" class="form-horizontal span3 form-actions form-signup pull-right">
+					<form method="post" action="<?php echo Kohana::$base_url.Route::get('index')->uri(array('action' => 'signup')) ?>" class="form-horizontal span3 form-actions form-signup pull-right">
 						<div class="control-group">
 							<div class="input-prepend" id="signup-input-username">
 								<span class="add-on"><i class="icon-user"></i></span><input type="text" name="username" autocomplete="off" placeholder="<?php echo __('Username')?>">

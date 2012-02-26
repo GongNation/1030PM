@@ -3,25 +3,18 @@
 // 静态文件 (CSS, JS, images)
 Route::set('media', 'media(/<file>)', array('file' => '.+'))
 	->defaults(array(
-		'controller'	=> 'index',
+		'controller'	=> 'base',
 		'action'		=> 'media',
 		'file'			=> NULL,
 	));
 
-// 用户注册
-Route::set('signup', 'signup')
+// index
+Route::set('index', '(<action>)', array('action' => '(signup|login|about|contact|jobs|service|privacy|feedback)'))
 	->defaults(array(
 		'controller'	=> 'index',
-		'action'		=> 'signup',
+		'action'		=> 'index',
 	));
 
-// 用户登录
-Route::set('login', 'login')
-	->defaults(array(
-		'controller'	=> 'index',
-		'action'		=> 'login',
-	));
-	
 // 用户退出
 Route::set('logout', 'logout')
 	->defaults(array(
@@ -30,7 +23,7 @@ Route::set('logout', 'logout')
 	));
 
 // 用户的个人主页
-Route::set('home', '<username>')
+Route::set('profile', '<username>')
 	->defaults(array(
 		'controller'	=> 'customer',
 		'action'		=> 'index',
@@ -44,12 +37,11 @@ Route::set('settings', 'settings/<action>', array('action' => '(account|system|t
 	));
 
 // 默认
-Route::set('default', '(<index>/)(<controller>(/<action>))', array('index' => '(index.php|index.html)'))
-	->defaults(array(
-		'controller'	=> 'index',
-		'action'		=> 'index',
-		'index'			=> NULL,
-	));
+//Route::set('default', '(<controller>(/<action>))')
+//	->defaults(array(
+//		'controller'	=> 'index',
+//		'action'		=> 'index',
+//	));
 
 // 404错误页面
 Route::set('error', '<path>', array('path' => '.+'))

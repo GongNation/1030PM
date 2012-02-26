@@ -10,33 +10,22 @@ class Controller_Index extends Controller_Template {
 
 	public $template = 'default/index/index';
 
-	// Routes
-	protected $media;
-	protected $index;
-	public $login_error = FALSE;
-	public $signup_error = FALSE;
+	protected $login_error = FALSE;
+	protected $signup_error = FALSE;
+	protected $is_login = FALSE;
 
 	public function before()
 	{
 		$action = $this->request->action();
-		if ($action == 'media')
+		if ($action == 'media' AND !$this->request->is_ajax())
 		{
 			// media和ajax页面不需要页面模版
 			$this->auto_render = FALSE;
 		}
 		else
 		{
-			// 获取必要的route
-			$this->media = Route::get('media');
-			$this->index = Route::get('default');
-			
-			if ($action == 'index')
-			{
-				// 判断用户是否已登录，如已登录则重定向到其个人主页
-				$username = Model_User::is_login();
-				if ($username) $this->request->redirect($username);
-			}
-			
+			// 设置语言
+			Model_User::set_lang();
 		}
 
 		parent::before();
@@ -45,8 +34,17 @@ class Controller_Index extends Controller_Template {
 	// Index
 	public function action_index()
 	{
+		// 判断用户是否已登录，如已登录则将请求转向到其个人中心
+		$is_login = Model_User::is_login();
+		if ($is_login)
+		{
+			$request = Request::factory('customer');
+			$response = $request->execute()->send_headers()->body();
+			echo $response;
+			exit;
+		}
+		
 		$this->template->title = "Kohana-Bootstrap";
-
 		$this->template->login_error = $this->login_error;
 		$this->template->signup_error = $this->signup_error;
 	}
@@ -54,8 +52,16 @@ class Controller_Index extends Controller_Template {
 	// Login
 	public function action_login()
 	{
+		// 判断用户是否已登录，如已登录则重定向到其个人中心
+		$is_login = Model_User::is_login();
+		if ($is_login)
+		{
+			$this->request->redirect();
+		}
+		
 		if (count($this->request->post()) == 0)
 		{
+			// 无数据，重定向到登录页面
 			$this->request->redirect();
 		}
 		else
@@ -64,9 +70,9 @@ class Controller_Index extends Controller_Template {
 			$password = $this->request->post('password');
 			$remember = $this->request->post('remember');
 			$login = Model_User::login($login, $password, $remember);
-			if (!in_array($login, array(1, 2, 3)))
+			if ($login === TRUE)
 			{
-				$this->request->redirect($login);
+				$this->request->redirect();
 			}
 			$this->login_error = $login;
 			$this->action_index();
@@ -76,8 +82,16 @@ class Controller_Index extends Controller_Template {
 	// Signup
 	public function action_signup()
 	{
+		// 判断用户是否已登录，如已登录则重定向到其个人中心
+		$is_login = Model_User::is_login();
+		if ($is_login)
+		{
+			$this->request->redirect();
+		}
+		
 		if (count($this->request->post()) == 0)
 		{
+			// 无数据，重定向到注册页面
 			$this->request->redirect();
 		}
 		else
@@ -87,18 +101,9 @@ class Controller_Index extends Controller_Template {
 			$email 		= $this->request->post('email');
 			
 			$signup = Model_User::signup($username, $password, $email);
-			if ($signup === FALSE)
+			if (is_bool($signup))
 			{
-				// 注册失败
 				$this->request->redirect();
-			}
-			else if ($signup > 0)
-			{
-				// 注册成功
-				$session = Session::instance();
-				$session->set('username', $username);
-				$session->set('id', $signup);
-				$this->request->redirect($username);
 			}
 			$this->signup_error = $signup;
 			$this->action_index();
@@ -147,22 +152,8 @@ class Controller_Index extends Controller_Template {
 				$media->uri(array('file' => 'js/index.js')),
 			);
 
-			// I18n
-			$languages = Kohana::message('languages');
-			$lang = $this->request->query('lang');
-			if ($lang !== NULL)
-			{
-				// 若$lang不在定义的列表中，则返回404状态
-				if (!array_key_exists($lang, $languages)) $this->response->status(404);
-				
-				// 在cookie中设置语言
-				Model_User::set_lang($lang);
-			}
-
-			$this->template->lang = I18n::$lang;
-
 			// Add languages
-			$this->template->languages = $languages;
+			$this->template->languages = Kohana::message('languages');
 		}
 
 		return parent::after();
