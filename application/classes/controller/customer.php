@@ -8,7 +8,7 @@
  */
 class Controller_Customer extends Controller_Template {
 
-	public $template = 'default/customer/home';
+	public $template = 'default/tpl_main';
 
 	protected $session;
 
@@ -36,25 +36,27 @@ class Controller_Customer extends Controller_Template {
 		parent::before();
 	}
 
-// Index
+	// Index
 	public function action_index()
 	{
 	}
 	
-	// Profile
+	// Home
 	public function action_home()
 	{
 		$this->template->title = "Home Page";
 		$this->template->username_session = $this->session->get('username');
+		$this->template->view = View::factory('default/home');
 	}
 	
-	// Index
+	// Profile
 	public function action_profile()
 	{
 		$this->template->title = "Home Page";
 		$username_get = $this->request->param('username');
 		$this->template->username_get = $username_get;
 		$this->template->username_session = $this->session->get('username');
+		$this->template->view = View::factory('default/profile');
 	}
 
 	// Logout
@@ -68,18 +70,6 @@ class Controller_Customer extends Controller_Template {
 	public function action_archives()
 	{
 		$this->template->title = "archives";
-	}
-
-	// Demos
-	public function action_demos()
-	{
-		$this->template->title = "demos";
-	}
-
-	// About
-	public function action_about()
-	{
-		$this->template->title = "about";
 	}
 
 	public function action_media()

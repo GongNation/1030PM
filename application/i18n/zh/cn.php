@@ -11,7 +11,6 @@ return array
 	'Privacy'						=> '隐私',
 	'Feedback'						=> '意见',
 	
-	
 	// sign up and login
 	'Username or Email'				=> '用户名或邮箱',
 	'Username'						=> '用户名',
@@ -33,4 +32,6 @@ return array
 	
 	// language
 	'language:English'				=> '语言:简体中文',
+	
+	'inbox'							=> '消息',
 );
