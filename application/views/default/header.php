@@ -28,7 +28,7 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="#">Kohana-Bootstrap</a>
+				<a class="brand" href="/">Kohana-Bootstrap</a>
 				<ul class="nav">
 					<li class="active"><a href="/" title="<?php echo __('Home') ?>"><i class="icon-home"></i></a></li>
 					<li><a href="<?php echo $username_session ?>" title="<?php echo __('Profile') ?>"><i class="icon-user"></i></a></li>

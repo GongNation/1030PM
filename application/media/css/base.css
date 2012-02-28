@@ -93,21 +93,18 @@ input[type="password"] {
 .navbar .nav > li > a:hover i {
 	background-image: url("../plugin/bootstrap/img/glyphicons-halflings-white.png");
 }
-.sidebar-left{
+.sidebar-left {
 	min-height: 500px;
 }
-.sidebar-left .nav-header {
-	color: #ffffff;
-}
-.sidebar-left ul a {
+.sidebar-left ul li a {
 	color: #222;
 	text-shadow: none;
 }
-.sidebar-left ul a:hover {
+.sidebar-left ul li a:hover {
 	background-color: #9C3C58;
 	color: #ffffff;
 }
-.sidebar-left ul a:hover i {
+.sidebar-left ul li a:hover i {
 	background-image: url("../plugin/bootstrap/img/glyphicons-halflings-white.png");
 }
 .sidebar-left ul .active a {
@@ -155,9 +152,47 @@ input[type="password"] {
 	background: #9C3C58;
 }
 .sidebar-right {
-	width: 189px;
-	border-left:1px solid #333333;
+	width: 190px;
 	min-height: 500px;
+}
+.sidebar-right ul li a {
+	color: #222;
+	text-shadow: none;
+}
+.sidebar-right ul li a:hover {
+	background-color: #9C3C58;
+	color: #ffffff;
+}
+.sidebar-right ul li a:hover i {
+	background-image: url("../plugin/bootstrap/img/glyphicons-halflings-white.png");
+}
+.sidebar-right li .cmd-frd{
+	width: 162px;
+	padding: 5px 15px;
+	margin: 0px -15px;
+	height: 40px;
+	border-bottom: 1px solid #5A4B53;
+}
+.sidebar-right li .cmd-frd .close{
+	display: none;
+}
+.sidebar-right li .cmd-frd:hover{
+	background-color: #9C3C58;
+}
+.sidebar-right li .cmd-frd:hover .close{
+	display: block;
+}
+.sidebar-right .nav-header,
+.sidebar-right .nav-header a,
+.sidebar-right .nav-header a:hover {
+	color: #ffffff;
+	background-color: #5A4B53;
+}
+.sidebar-right ul .active a {
+	background-color: #8D193C;
+}
+.sidebar-right ul .active a:hover {
+	background-color: #9C3C58;
 }
 /* footer */
 .footer {

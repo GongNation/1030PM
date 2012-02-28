@@ -24,7 +24,7 @@
 			var menu_all_in = new PathMenuObj('pathmenu',{
 				'PathPosition': {position:'relative', top:0,right:0, width:40, height:40},
 				'mainButton': [
-					{'bg':'','css':'','cover':'/media/images/avatar.jpg','html':''},
+					{'bg':'','css':'','cover':'/media/images/avatar-40x40.jpg','html':''},
 					{'bg':'','css':'','cover':'','html':'','angle':-405,'speed':200}
 				],
 				'Button': {'bg':'','css':{width:40,height:40},'cover':'/media/images/avatar-40x40.jpg'},
@@ -40,6 +40,10 @@
 				'ICount': 6,
 				'AppendTo': '#system-menu-in',
 				'Radius': 150
+			});
+			$('.cmd-frd .close').click(function(){
+				$this = $(this);
+				$this.parent().hide(); 
 			});
 		});
 	</script>
